@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="320dp"
+    android:height="180dp"
+    android:viewportWidth="320"
+    android:viewportHeight="180">
+
+    <!-- Background card with deep dark gradient -->
+    <path
+        android:pathData="M0,0h320v180h-320z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="linear"
+                android:startX="0"
+                android:startY="0"
+                android:endX="320"
+                android:endY="180">
+                <item android:offset="0.0" android:color="#FF161626" />
+                <item android:offset="0.5" android:color="#FF1C1C31" />
+                <item android:offset="1.0" android:color="#FF252542" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Subtle background decorative glow ring -->
+    <path
+        android:pathData="M75,90 A55,55 0 1,0 75,90.1"
+        android:strokeWidth="1.5"
+        android:strokeColor="#1A46EDC8" />
+    <path
+        android:pathData="M75,90 A70,70 0 1,0 75,90.1"
+        android:strokeWidth="1.0"
+        android:strokeColor="#1250507A" />
+
+    <!-- Titanium Logo Emblem on the left side (Center: X=75, Y=90) -->
+    <!-- Outer elliptical planetary orbit tilted -30 deg -->
+    <group
+        android:pivotX="75"
+        android:pivotY="90"
+        android:rotation="-30">
+        <path
+            android:pathData="M75,55 A45,22.5 0 1,0 75,125 A45,22.5 0 1,0 75,55"
+            android:strokeColor="#FF50507A"
+            android:strokeWidth="3.5"
+            android:fillColor="#00000000" />
+        <!-- Orbital Node 1 -->
+        <path
+            android:pathData="M114,83 A7.5,7.5 0 1,0 114,97 A7.5,7.5 0 1,0 114,83"
+            android:fillColor="#FF9393BF" />
+        <!-- Orbital Node 2 -->
+        <path
+            android:pathData="M36,83 A7.5,7.5 0 1,0 36,97 A7.5,7.5 0 1,0 36,83"
+            android:fillColor="#FF46EDC8" />
+    </group>
+
+    <!-- Core nucleus sphere -->
+    <path
+        android:pathData="M75,67 A23,23 0 1,1 75,113 A23,23 0 1,1 75,67"
+        android:fillColor="#FF23233B"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="4.0" />
+
+    <!-- Inner glowing nucleus accent -->
+    <path
+        android:pathData="M75,76 A14,14 0 1,1 75,104 A14,14 0 1,1 75,76"
+        android:fillColor="#FF38385E" />
+
+    <!-- Brand Divider Line -->
+    <path
+        android:pathData="M140,50 L140,130"
+        android:strokeWidth="2.0">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:type="linear"
+                android:startX="140"
+                android:startY="50"
+                android:endX="140"
+                android:endY="130">
+                <item android:offset="0.0" android:color="#0046EDC8" />
+                <item android:offset="0.5" android:color="#8046EDC8" />
+                <item android:offset="1.0" android:color="#0046EDC8" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- "TITANIUM" Header Typography -->
+    <!-- Letter T -->
+    <path
+        android:pathData="M155,70 H171 V74 H165 V94 H161 V74 H155 Z"
+        android:fillColor="#FFFFFFFF" />
+    <!-- Letter I -->
+    <path
+        android:pathData="M175,70 H179 V94 H175 Z"
+        android:fillColor="#FFFFFFFF" />
+    <!-- Letter T -->
+    <path
+        android:pathData="M183,70 H199 V74 H193 V94 H189 V74 H183 Z"
+        android:fillColor="#FFFFFFFF" />
+    <!-- Letter A -->
+    <path
+        android:pathData="M208,70 H213 L221,94 H216.5 L214.5,88 H206.5 L204.5,94 H200 Z M213.3,84.5 L210.5,75.5 L207.7,84.5 Z"
+        android:fillColor="#FFFFFFFF" />
+    <!-- Letter N -->
+    <path
+        android:pathData="M225,70 H229 L237.5,86 V70 H241.5 V94 H237.5 L229,78 V94 H225 Z"
+        android:fillColor="#FFFFFFFF" />
+    <!-- Letter I -->
+    <path
+        android:pathData="M246,70 H250 V94 H246 Z"
+        android:fillColor="#FFFFFFFF" />
+    <!-- Letter U -->
+    <path
+        android:pathData="M254,70 H258 V86 C258,89.5 260,91 263,91 C266,91 268,89.5 268,86 V70 H272 V86 C272,92 268.5,94.5 263,94.5 C257.5,94.5 254,92 254,86 Z"
+        android:fillColor="#FFFFFFFF" />
+    <!-- Letter M -->
+    <path
+        android:pathData="M276,70 H281 L285.5,84.5 L290,70 H295 V94 H291 V76.5 L287,89.5 H284 L280,76.5 V94 H276 Z"
+        android:fillColor="#FFFFFFFF" />
+
+    <!-- "BROWSER" Subtitle Typography (Y: 102 to 112) -->
+    <!-- B -->
+    <path
+        android:pathData="M155,102 H161 C163,102 164.5,102.8 164.5,104.2 C164.5,105.2 163.8,106 162.8,106.3 C164,106.6 164.8,107.4 164.8,108.8 C164.8,110.5 163.2,111.5 161,111.5 H155 Z M157.5,104 V106 H160.5 C161.5,106 162.2,105.4 162.2,104.8 C162.2,104.2 161.5,104 160.5,104 Z M157.5,107.5 V109.5 H161 C162,109.5 162.5,109 162.5,108.3 C162.5,107.7 162,107.5 161,107.5 Z"
+        android:fillColor="#FF9393BF" />
+    <!-- R -->
+    <path
+        android:pathData="M167,102 H172.5 C174.5,102 176,103 176,105 C176,106.5 174.8,107.5 173.2,107.8 L176.5,111.5 H173.5 L170.8,108 H169.5 V111.5 H167 Z M169.5,104 V106.3 H172.2 C173,106.3 173.7,105.8 173.7,105.1 C173.7,104.4 173,104 172.2,104 Z"
+        android:fillColor="#FF9393BF" />
+    <!-- O -->
+    <path
+        android:pathData="M178,106.7 C178,103.5 180,102 182.5,102 C185,102 187,103.5 187,106.7 C187,110 185,111.5 182.5,111.5 C180,111.5 178,110 178,106.7 Z M180.5,106.7 C180.5,108.5 181.3,109.5 182.5,109.5 C183.7,109.5 184.5,108.5 184.5,106.7 C184.5,105 183.7,104 182.5,104 C183.7,104 180.5,105 180.5,106.7 Z"
+        android:fillColor="#FF9393BF" />
+    <!-- W -->
+    <path
+        android:pathData="M189,102 H191.5 L193.3,108 L195,102 H197.5 L199.3,108 L201,102 H203.5 L200.5,111.5 H198 L196.2,106 L194.5,111.5 H192 Z"
+        android:fillColor="#FF9393BF" />
+    <!-- S -->
+    <path
+        android:pathData="M205,110 L206.5,108.8 C207.2,109.5 208,109.8 208.8,109.8 C209.7,109.8 210.2,109.4 210.2,108.8 C210.2,108.2 209.6,108 208.3,107.6 C206.8,107 205.3,106.4 205.3,104.8 C205.3,103.2 206.7,102 208.7,102 C210,102 211.2,102.5 212,103.4 L210.5,104.6 C210,104 209.3,103.8 208.7,103.8 C207.8,103.8 207.3,104.2 207.3,104.7 C207.3,105.2 207.8,105.5 209.2,106 C210.7,106.5 212.2,107.2 212.2,108.8 C212.2,110.5 210.7,111.6 208.7,111.6 C207.2,111.6 205.8,110.9 205,110 Z"
+        android:fillColor="#FF9393BF" />
+    <!-- E -->
+    <path
+        android:pathData="M214,102 H221 V104 H216.5 V105.8 H220 V107.8 H216.5 V109.5 H221 V111.5 H214 Z"
+        android:fillColor="#FF9393BF" />
+    <!-- R -->
+    <path
+        android:pathData="M223,102 H228.5 C230.5,102 232,103 232,105 C232,106.5 230.8,107.5 229.2,107.8 L232.5,111.5 H229.5 L226.8,108 H225.5 V111.5 H223 Z M225.5,104 V106.3 H228.2 C229,106.3 229.7,105.8 229.7,105.1 C229.7,104.4 229,104 228.2,104 Z"
+        android:fillColor="#FF9393BF" />
+
+    <!-- "ANDROID TV EDITION" Badge / Tag -->
+    <!-- Pill background -->
+    <path
+        android:pathData="M155,120 H240 C242.5,120 244,121.5 244,124 V124 C244,126.5 242.5,128 240,128 H155 C152.5,128 151,126.5 151,124 V124 C151,121.5 152.5,120 155,120 Z"
+        android:fillColor="#3346EDC8" />
+    <!-- Pill Accent Dot -->
+    <path
+        android:pathData="M156,124 A1.8,1.8 0 1,1 156,124.01"
+        android:fillColor="#FF46EDC8" />
+    <!-- TV Indicator Icon -->
+    <path
+        android:pathData="M162,122 H170 V126 H162 Z M164,126 L163,127 H169 L168,126 Z"
+        android:strokeColor="#FF46EDC8"
+        android:strokeWidth="0.8"
+        android:fillColor="#00000000" />
+    <!-- Text bar line representation for 4K crispness -->
+    <path
+        android:pathData="M173,123.5 H238 V124.5 H173 Z"
+        android:fillColor="#FF46EDC8" />
+
+</vector>
