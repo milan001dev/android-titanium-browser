@@ -34,13 +34,26 @@ gclient runhooks
 ./build/install-build-deps.sh --no-prompt
 
 source $SCRIPT_DIR/patch.sh
-cp $SCRIPT_DIR/args.gn out/Default/args.gn
-gn gen out/Default # gn args out/Default; echo 'treat_warnings_as_errors = false' >> out/Default/args.gn
 mkdir -p out/tmp out/release
 
-autoninja -C out/Default chrome_public_apk chrome_public_bundle
-mv $(find out/Default/apks -name 'Chrome*.apk') out/tmp/$VERSION-arm64-v8a.apk
-mv $(find out/Default/apks -name 'Chrome*.aab') out/tmp/$VERSION-arm64-v8a.aab
+# 1. Compila ARM64 (64-bit per SoC MediaTek mt5896)
+mkdir -p out/arm64
+cp $SCRIPT_DIR/args.gn out/arm64/args.gn
+sed -i 's/target_cpu = "arm"/target_cpu = "arm64"/' out/arm64/args.gn
+gn gen out/arm64
+autoninja -C out/arm64 chrome_public_apk chrome_public_bundle
+mv $(find out/arm64/apks -name 'Chrome*.apk') out/tmp/$VERSION-arm64-v8a.apk
+mv $(find out/arm64/apks -name 'Chrome*.aab') out/tmp/$VERSION-arm64-v8a.aab
+rm -rf out/arm64
+
+# 2. Compila ARM32 (32-bit armeabi-v7a di fallback)
+mkdir -p out/arm
+cp $SCRIPT_DIR/args.gn out/arm/args.gn
+sed -i 's/target_cpu = "arm64"/target_cpu = "arm"/' out/arm/args.gn
+gn gen out/arm
+autoninja -C out/arm chrome_public_apk
+mv $(find out/arm/apks -name 'Chrome*.apk') out/tmp/$VERSION-armeabi-v7a.apk
+rm -rf out/arm
 
 export PATH=$PWD/third_party/jdk/current/bin/:$PATH
 export ANDROID_HOME=$PWD/third_party/android_sdk/public
