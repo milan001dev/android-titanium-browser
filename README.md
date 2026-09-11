@@ -39,6 +39,30 @@ To view and access the debug URLs, use [`chrome://chrome-urls`](chrome://chrome-
 
 The option is available by using the menu button <kbd>⋮</kbd> in the top right corner, then selecting **Settings**, **Privacy and security**. If you experience issues with WebRTC due to IPs being shielded by default (e.g. [Discord Voice](https://discord.com/blog/how-discord-handles-two-and-half-million-concurrent-voice-users-using-webrtc)), try changing it to **Default public interface only**, or **Default**.
 
+### Android TV & Remote Control Support
+
+Titanium Browser is 100% compatible with **Android TV** and **Google TV** (including 4K Ultra HD displays like Xiaomi TV / MediaTek `mt5896` platforms on Android 14):
+
+- **Native Leanback Launcher**: Appears directly in the TV home screen and app grid with a high-resolution 16:9 vector TV banner.
+- **D-Pad Spatial Navigation**: Navigate links, buttons, video players, and form fields using the remote control directional arrows.
+- **TV Remote Key Bindings**:
+  - <kbd>▲</kbd> <kbd>▼</kbd> <kbd>◄</kbd> <kbd>►</kbd> (**D-Pad Arrows**): Move focus cursor across web page elements and scroll smoothly.
+  - <kbd>OK</kbd> / <kbd>ENTER</kbd>: Activate focused link, press button, or trigger Android TV virtual keyboard (Gboard TV).
+  - <kbd>BACK</kbd>: Navigates backward in web history (`tab.goBack()`) without abruptly closing the browser.
+  - <kbd>MENU</kbd>: Immediately opens the browser app menu for instant access to tabs, bookmarks, extensions, and settings.
+  - <kbd>PLAY</kbd> / <kbd>PAUSE</kbd>: Direct control over HTML5 media playback.
+- **Hardware Decoders & 4K UHD**: Native `arm64-v8a` build with hardware-accelerated 4K decoding for **AV1**, **HEVC (H.265)**, **VP9**, and **H.264**.
+- **High-Contrast Focus Ring**: High-visibility focus indicator designed for couch viewing (10-foot experience) on 3840x2160 panels.
+
+#### Installation on Android TV
+1. Download the `arm64-v8a.apk` from [Releases](https://github.com/jqssun/android-titanium-browser/releases/latest).
+2. Sideload via USB drive using any TV file manager, or install via ADB:
+   ```shell
+   adb connect <TV_IP_ADDRESS>
+   adb install -r Titanium-*-arm64-v8a.apk
+   ```
+
+
 ## Implementation
 
 > [!WARNING]

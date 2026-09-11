@@ -2,8 +2,27 @@
 
 mkdir -p chrome/android/java/res_titanium_base
 cp $SCRIPT_DIR/res/drawable/themed_app_icon.xml chrome/android/java/res_titanium_base/drawable/themed_app_icon.xml
+cp $SCRIPT_DIR/res/drawable/tv_banner.xml chrome/android/java/res_titanium_base/drawable/tv_banner.xml 2>/dev/null || true
 for icon in $(find chrome/android/java/res_titanium_base -type f -name '*.png'); do convert $icon -fill navy -tint 36 $icon && $SCRIPT_DIR/res/icon.sh $icon; done
-sed -i 's|<application |<application android:extractNativeLibs="false" |' chrome/android/java/AndroidManifest.xml
+
+# android tv: leanback hardware features (touchscreen optional, telephony optional) and banner
+sed -i 's|<application |<uses-feature android:name="android.software.leanback" android:required="false" />\
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />\
+    <uses-feature android:name="android.hardware.telephony" android:required="false" />\
+    <uses-feature android:name="android.hardware.camera" android:required="false" />\
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />\
+    <uses-feature android:name="android.hardware.microphone" android:required="false" />\
+    <uses-feature android:name="android.hardware.bluetooth" android:required="false" />\
+    <uses-feature android:name="android.hardware.nfc" android:required="false" />\
+    <uses-feature android:name="android.hardware.location.gps" android:required="false" />\
+    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false" />\
+    <uses-feature android:name="android.hardware.sensor.compass" android:required="false" />\
+    <uses-feature android:name="android.hardware.sensor.gyroscope" android:required="false" />\
+    <application android:banner="@drawable/tv_banner" android:extractNativeLibs="false" |' chrome/android/java/AndroidManifest.xml
+
+# android tv: leanback launcher category for tv home screen & google tv app drawer
+sed -i 's|<category android:name="android.intent.category.LAUNCHER" />|&\n                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />|' chrome/android/java/AndroidManifest.xml
+
 sed -i 's|<data android:mimeType="message/rfc822"/>|<data android:mimeType="message/rfc822"/><data android:mimeType="application/pdf"/>|' chrome/android/java/AndroidManifest.xml
 sed -i '/com.google.ar.core.min_apk_version/d' third_party/arcore-android-sdk-client/AndroidManifest_basesplit.xml
 # sed -i 's|Google LLC|jqssun, Google LLC|' chrome/browser/ui/android/strings/android_chrome_strings.grd
@@ -161,4 +180,29 @@ if (content::WebContents::HasLiveWebContentsForBrowserContext(profile)) { return
 sed -i 's/|| mSupportedProfileType == SupportedProfileType.REGULAR) {/|| mSupportedProfileType == SupportedProfileType.REGULAR || mSupportedProfileType == SupportedProfileType.MIXED) {/' chrome/android/java/src/org/chromium/chrome/browser/ChromeTabbedActivity.java
 sed -i 's/|| mSupportedProfileType == SupportedProfileType.OFF_THE_RECORD) {/|| mSupportedProfileType == SupportedProfileType.OFF_THE_RECORD || mSupportedProfileType == SupportedProfileType.MIXED) {/' chrome/android/java/src/org/chromium/chrome/browser/ChromeTabbedActivity.java
 
+# android tv: spatial navigation for dpad remote navigation on web pages
+sed -i 's|spatial_navigation_enabled(false)|spatial_navigation_enabled(true)|' third_party/blink/common/web_preferences/web_preferences.cc
+sed -i 's|prefs.spatial_navigation_enabled = command_line.HasSwitch(switches::kEnableSpatialNavigation);|prefs.spatial_navigation_enabled = true;|' content/browser/web_contents/web_contents_impl.cc
+sed -i '/if (is_spatial_navigation_disabled_) { prefs.spatial_navigation_enabled = false; }/d' content/browser/web_contents/web_contents_impl.cc
+
+# android tv: remote control key mapping (menu button, back button, media keys)
+sed -i '/KeyboardShortcuts\.dispatchKeyEvent(event, this/i\        if (event.getAction() == KeyEvent.ACTION_DOWN) {\
+            int tvKeyCode = event.getKeyCode();\
+            if (tvKeyCode == KeyEvent.KEYCODE_MENU) {\
+                onMenuOrKeyboardAction(org.chromium.chrome.R.id.show_menu, true);\
+                return true;\
+            }\
+            if (tvKeyCode == KeyEvent.KEYCODE_BACK) {\
+                org.chromium.chrome.browser.tab.Tab tvTab = getActivityTab();\
+                if (tvTab != null \&\& tvTab.canGoBack()) {\
+                    tvTab.goBack();\
+                    return true;\
+                }\
+            }\
+        }' chrome/android/java/src/org/chromium/chrome/browser/ChromeTabbedActivity.java
+
+# android tv: high-contrast focus ring for 4K displays
+sed -i 's|:focus-visible { outline: auto;|:focus-visible { outline: 3px solid #3d82f6 !important; outline-offset: 2px !important;|' third_party/blink/renderer/core/html/resources/html.css 2>/dev/null || true
+
 export PATCHED=1
+

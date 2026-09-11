@@ -1,7 +1,7 @@
 chrome_public_manifest_package = "io.github.jqssun.helium"
 is_desktop_android = true
 target_os = "android"
-target_cpu = "arm"
+target_cpu = "arm64"
 is_component_build = false
 is_debug = false
 is_official_build = true
@@ -9,6 +9,7 @@ symbol_level = 1
 disable_fieldtrial_testing_config = true
 ffmpeg_branding = "Chrome"
 proprietary_codecs = true
+enable_platform_hevc = true
 enable_vr = false
 enable_arcore = false
 enable_openxr = false

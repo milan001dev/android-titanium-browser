@@ -7,8 +7,16 @@ replace() {
 
 set_keys() {
     mkdir -p $SCRIPT_DIR/keys
-    echo $LOCAL_TEST_JKS | base64 -d > $SCRIPT_DIR/keys/local.properties
-    echo $STORE_TEST_JKS | base64 -d > $SCRIPT_DIR/keys/test.jks
+    if [ -n "$LOCAL_TEST_JKS" ] && [ -n "$STORE_TEST_JKS" ]; then
+        echo $LOCAL_TEST_JKS | base64 -d > $SCRIPT_DIR/keys/local.properties
+        echo $STORE_TEST_JKS | base64 -d > $SCRIPT_DIR/keys/test.jks
+    else
+        echo "No signing secrets provided, auto-generating debug keystore..."
+        keytool -genkey -v -keystore $SCRIPT_DIR/keys/test.jks -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -storepass android -keypass android -dname "CN=Android Debug,O=Android,C=US"
+        echo "keyAlias=androiddebugkey" > $SCRIPT_DIR/keys/local.properties
+        echo "keyPassword=android" >> $SCRIPT_DIR/keys/local.properties
+        echo "storePassword=android" >> $SCRIPT_DIR/keys/local.properties
+    fi
     unset LOCAL_TEST_JKS
     unset STORE_TEST_JKS
 }
