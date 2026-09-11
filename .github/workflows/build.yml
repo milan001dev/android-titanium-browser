@@ -51,27 +51,11 @@ jobs:
         run: |
           ./build.sh
 
-      - name: Set
-        run: |
-          export VERSION=$(find chromium/src/out/release -name '*arm64-v8a.apk' | sed 's/.*\///;s/\-arm64-v8a.apk$//')
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-          mv $(find chromium/src/out/release -name '*arm64-v8a.aab') $VERSION-${{ env.unix_time }}-arm64-v8a.aab 2>/dev/null || true
-          mv $(find chromium/src/out/release -name '*arm64-v8a.apk') $VERSION-${{ env.unix_time }}-arm64-v8a.apk 2>/dev/null || true
-          mv $(find chromium/src/out/release -name '*armeabi-v7a.apk') $VERSION-${{ env.unix_time }}-armeabi-v7a.apk 2>/dev/null || true
-
       - name: Publish
         uses: softprops/action-gh-release@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          name: v${{ env.VERSION }}
-          tag_name: v${{ env.VERSION }}
+          name: Titanium Browser Android TV
+          tag_name: v${{ env.unix_time }}
           files: |
-            *.aab
-            *.apk
-
-      - name: Attest
-        uses: actions/attest-build-provenance@v4
-        with:
-          subject-path: |
-            *.aab
-            *.apk
+            chromium/src/out/release/*.apk
